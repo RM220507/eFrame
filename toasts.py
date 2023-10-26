@@ -33,9 +33,10 @@ class ToastController:
             if toast.expired:
                 expired_toasts.append(toast)
             
-            toast_surface = toast.render((300, 75))
+            toast_size = (size[0] - self.__toast_spacing, 75)
+            toast_surface = toast.render(toast_size)
             
-            y = i * (75 + self.__toast_spacing)            
+            y = i * (toast_size[1] + self.__toast_spacing)            
             surface.blit(toast_surface, (0, y))
             
         for expired_toast in expired_toasts:

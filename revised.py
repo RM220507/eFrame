@@ -9,12 +9,17 @@ import json
 import sys
 import os.path
 from datetime import datetime
+
 import toasts
+import text_display
 
 
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 log_file = f"logs/{timestamp}.log"
 logging.basicConfig(filename=log_file, format="%(name)s - %(levelname)s - %(asctime)s - %(message)s", level=logging.INFO)
+
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 
 pygame.init()
 
@@ -51,13 +56,18 @@ class eFrame(socketio.AsyncServer):
         
         self.reset()
         
-        self.config = {
-            "photos_root_path" : "images",
-            "update_interval" : 3
-        }
+        self.load_config()
         
         self.paused = False
         
+    def load_config(self):
+        with open("config.json", "r") as f:
+            self.config = json.load(f)
+            
+    def write_config(self):
+        with open("config.json", "w") as f:
+            json.dump(self.config, f)
+    
     def connect_sql(self):
         with open("connection_data.json", "r") as f:
             db_credentials = json.load(f)
@@ -438,13 +448,22 @@ class eFrame(socketio.AsyncServer):
                 self.last_update = current_time
                 self.cycle_image()
 
-            self.canvas.fill((255, 255, 255))
+            self.canvas.fill(self.config.get("background_color", WHITE))
             
             self.canvas.blit(self.image, self.blit_pos)
             
-            toast_surface = self.toast_controller.update_toasts((300, 400))
-            self.canvas.blit(toast_surface, (675, 25))
-            
+            if self.config.get("display_toasts"):
+                toast_surface_size = (325, 400)          
+                toast_surface = self.toast_controller.update_toasts(toast_surface_size)
+                self.canvas.blit(toast_surface, (self.width - toast_surface_size[0], 25))
+                
+            if self.config.get("display_album"):
+                text_display.display_text(self.canvas, self.album, 40, self.config.get("album_color", BLACK), (25, 25), "left")
+                
+            if self.config.get("display_desc"):
+                if self.current_info[4]:
+                    text_display.display_text_wrapped(self.canvas, self.current_info[4], 40, self.config.get("desc_color", BLACK), (25, self.height - 80), self.width // 2, "left")
+                    
             pygame.display.flip()
 
 eframe = eFrame()
@@ -457,4 +476,4 @@ if __name__ == "__main__":
         t.start()
         eframe.mainloop()
     finally:
-        print("Done!")
+        eframe.write_config()

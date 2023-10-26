@@ -25,29 +25,36 @@ def wrap_text(text, font_size, max_width):
 
     return lines
 
-def render_text(text, font_size, text_color, text_position):
+def render_text(text, font_size, text_color, text_position, align="center"):
     font = pygame.font.Font(None, font_size)
 
     text_surface = font.render(text, True, text_color)
 
     text_rect = text_surface.get_rect()
 
-    text_rect.center = text_position
+    if align == "center":
+        text_rect.center = text_position
+    elif align == "left":
+        text_rect.left = text_position[0]
+        text_rect.centery = text_position[1]
+        
+    elif align == "right":
+        text_rect.right = text_position[0]
+        text_rect.centery = text_position[1]
     
     return text_surface, text_rect
 
-def display_text(display, text, font_size, text_color, text_position):
-    text_surface, text_rect = render_text(text, font_size, text_color, text_position)
+def display_text(display, text, font_size, text_color, text_position, align="center"):
+    text_surface, text_rect = render_text(text, font_size, text_color, text_position, align)
     
     display.blit(text_surface, text_rect)
     
-def display_text_wrapped(display, text, font_size, text_color, text_position, max_width):
+def display_text_wrapped(display, text, font_size, text_color, text_position, max_width, align="center"):
     lines = wrap_text(text, font_size, max_width)
     
     total_height = len(lines) * font_size
     y = text_position[1] - (total_height // 4)
     
     for line in lines:
-        display_text(display, line, font_size, text_color, (text_position[0], y))
+        display_text(display, line, font_size, text_color, (text_position[0], y), align)
         y += font_size
-    
