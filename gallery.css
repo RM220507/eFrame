@@ -1,0 +1,227 @@
+body {
+    background-color: #222;
+    font-family: sans-serif;
+    color: white;
+}
+
+.image-gallery {
+    background-color: #333;
+    width: calc(100% - 20px);
+    height: auto;
+    padding: 10px;
+}
+
+.image-wrapper {
+    background-color: #555;
+    width: 10%;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.image-name {
+    font-size: 15px;
+    overflow-wrap: break-word;
+}
+
+.selected-image-name {
+    font-size: 25px;
+    overflow-wrap: break-word;
+}
+
+.image {
+    width: 100%;
+    height: auto;
+}
+
+.image-pane {
+    position: fixed;
+    top: 0;
+    left: 75%;
+    width: 25%;
+    height: 100%;
+    background: #444;
+    z-index: 999;
+    overflow-y: auto;
+    display: none;
+}
+
+.selected-image-container {
+    padding-left: 20px;
+}
+
+.selected-image {
+    width: 50%;
+    height: auto;
+}
+
+.pagination-status {
+    display: inline;
+}
+
+.toolbar {
+    display: flex;
+    background-color: #555;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+}
+
+.toolbar-element {
+    display: block;
+    background: transparent;
+    border: none;
+    border-right: 2px solid #5F5;
+    text-align: center;
+    color: white;
+    font-size: 16px;
+    transition: background 0.3s, color 0.3s;
+    box-sizing: border-box;
+    padding: 14px 16px;
+    position: relative;
+}
+
+.toolbar-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #666;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 48px;
+    left: 0px;
+    padding: 5px;
+}
+
+.toolbar-dropdown {
+    cursor: pointer;
+}
+
+.toolbar-hoverable {
+    cursor: pointer;
+}
+
+.toolbar-dropdown:hover {
+    background-color: #666;
+}
+
+.toolbar-dropdown-content:hover {
+    display: block;
+}
+
+.toolbar-dropdown:hover .toolbar-dropdown-content {
+    display: block;
+}
+
+.toolbar-dropdown-content:hover .toolbar-dropdown {
+    background-color: #666;
+}
+
+.toolbar-hoverable:hover {
+    background-color: #666;
+}
+
+.multiselect-exit {
+    position: absolute;
+    top: 0;
+    left: 75%;
+    width: 25%;
+    height: 80px;
+}
+
+.multiselect-counter {
+    margin-top: 5px;
+}
+
+h1 {
+    color: white;
+}
+
+.main-title {
+    padding-top: 60px;
+}
+
+.vertical-integrated-button {
+    display: block;
+    padding: 15px 0;
+    background: transparent;
+    border-top: 2px solid #5F5;
+    text-align: center; /* Center the text horizontally */
+    color: white; /* Text color to match the border */
+    text-decoration: none; /* Remove the default underline for links */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    font-size: 16px; /* Adjust the font size as needed */
+    transition: background 0.3s, color 0.3s; /* Add a smooth transition effect */
+}
+
+.horizontal-integrated-button {
+    padding: 15px 0;
+    background: transparent;
+    border: none;
+    border-right: 2px solid #5F5;
+    text-align: center; /* Center the text horizontally */
+    color: white; /* Text color to match the border */
+    text-decoration: none; /* Remove the default underline for links */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    font-size: 16px; /* Adjust the font size as needed */
+    transition: background 0.3s, color 0.3s; /* Add a smooth transition effect */
+    box-sizing: border-box;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.vertical-button-list {
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.horizontal-button-list {
+    border-top: 2px solid #5F5;
+    border-right: none;
+    display: flex;
+}
+
+.vertical-button-list:last-child {
+    border-bottom: 2px solid #5F5;
+}
+
+.horizontal-integrated-button.last {
+    border-right: none;
+}
+
+.vertical-integrated-button:hover {
+    background-color: #666;
+}
+
+.horizontal-integrated-button:hover {
+    background-color: #666;
+}
+
+
+@media screen and (max-width: 768px) {
+    .image-pane {
+        width: 100%;
+        left: 0;
+    }
+
+    .image-wrapper {
+        width: 75%;
+    }
+
+    .last-toolbar-element {
+        border-right: none;
+    }
+
+    .toolbar-dropdown-content {
+        top: 68px;
+    }
+}

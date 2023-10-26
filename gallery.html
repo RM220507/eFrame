@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>eFrame Control</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
+        <link rel="stylesheet" href="gallery.css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div id="basic-toolbar" class="toolbar">
+            <select id="album_select" class="toolbar-element toolbar-hoverable"></select>
+            <div class="toolbar-element toolbar-dropdown">
+                New Album
+                <div class="toolbar-dropdown-content">
+                    <input id="new-album-name" size="15" maxlength="255"></input>
+                    <button onclick="new_album()">Create New Album</button>
+                </div>
+            </div>
+            <div class="toolbar-element toolbar-dropdown last-toolbar-element" id="delete-album-button">
+                Delete Album
+                <div class="toolbar-dropdown-content">
+                    <button onclick="delete_album()">I Want to Delete this Album</button>
+                </div>
+            </div>
+            <div class="toolbar-element toolbar-dropdown last-toolbar-element" id="upload-button">
+                Upload Images
+                <div class="toolbar-dropdown-content">
+                    <form id="fileUploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" id="fileInput" multiple>
+                        <input type="submit" value="Upload Files" name="submit">
+                    </form> 
+                </div>
+            </div>
+        </div>
+
+        <div id="multiselect-toolbar" class="toolbar" style="display: none">
+            <div class="toolbar-element toolbar-dropdown">
+                Add to Album
+                <div class="toolbar-dropdown-content">
+                    <select id="multiselect-album-dropdown"></select>
+                    <button onclick="multi_add_to_album()">Add to Album</button>
+                </div>
+            </div>
+            <div class="toolbar-element toolbar-dropdown" id="delete-album-button">
+                Remove
+                <div class="toolbar-dropdown-content">
+                    <button onclick="multi_delete()">Remove from Album</button>
+                </div>
+            </div>
+            
+            <div id="multiselect-counter" class="toolbar-element">0 selected</div>
+            <div class="toolbar-element toolbar-hoverable last-toolbar-element" onclick="deactivate_multiselect()">Cancel</div>
+        </div>
+
+        <h1 class="main-title">
+            <a href="/" style="color: white">eFrame</a>
+            Image Gallery
+        </h1>
+
+        <div id="image-gallery" class="image-gallery">
+            <button id="activate-multiselect" onclick="activate_multiselect()">Select Multiple</button>
+            <div id="image-container"></div>
+            <div id="pagination">
+                <button id="first-page" onclick="show_images(1)">First Page</button>
+                <button id="prev-page">Previous Page</button>
+                <p id="pagination-status" class="pagination-status"></p>
+                <button id="next-page">Next Page</button>
+                <button id="last-page" onclick="show_images(number_of_pages)">Last Page</button>
+            </div>
+        </div>
+
+        <div id="image-pane" class="image-pane">
+            <div class="selected-image-container">
+                <h1>Image Properties</h1>
+                <img id="selected-image" src="" alt="Selected Image" class="selected-image">
+                <p class="selected-image-name" id="selected-image-name"></p>
+                <input id="selected-image-rotation" type="number" value="0" min="0" max="270" step="90" />
+                <textarea id="selected-image-desc" rows="5" style="width: 80%" maxlength="1024"></textarea><br/>
+            </div>
+            <ul class="vertical-button-list">
+                <div class="full-width vertical-integrated-button" onclick="update_image_data()">Save Changes</div>
+                <div class="full-width vertical-integrated-button" onclick="single_delete()">Remove from Album</div>
+                <div class="horizontal-button-list">
+                    <select class="half-width horizontal-integrated-button" id="selected-album-dropdown"></select>
+                    <div class="half-width horizontal-integrated-button last" onclick="single_add_to_album()">Add to Album</div>
+                </div>
+                <div class="full-width vertical-integrated-button" onclick="hide_pane()">Quit</div>
+            </ul>
+        </div>
+
+        <script src="gallery.js"></script>
+    </body>
+</html>
