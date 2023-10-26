@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>eFrame Control</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+
+        <style>
+            body {
+                color: white;
+                font-family: sans-serif;
+                background-color: #222;
+                text-align: center;
+            }
+
+            /* Apply basic styles to the button grid container */
+            .button-grid {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            /* Style for all buttons */
+            .button {
+                width: 33%;
+                padding: 15px 20px;
+                margin: 5px;
+                background-color: #444;
+                color: #fff;
+                border: 1px solid #5F5;
+                cursor: pointer;
+            }
+
+            /* Style for full-width buttons in the 2nd and 3rd rows */
+            .full-width {
+                width: 100%;
+            }
+
+            .half-width {
+                width: 50%;
+            }
+
+            /* Center the text in buttons */
+            .button-row {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+
+    </head>
+    <body> 
+        <h1>eFrame Control Panel</h1>
+        <div class="button-grid">
+            <div class="button-row full-width">
+                <button class="button" onclick="cycle_image(-1)">Previous</button>
+                <button class="button" onclick="pause()">Pause</button>
+                <button class="button" onclick="cycle_image(1)">Next</button>
+            </div>
+            <div class="button-row full-width">
+                <select id="album_select" class="button half-width">
+                    <option value="All">All</option>
+                </select>
+                <button class="button half-width" onclick="update_album()">Update Album</button>
+            </div>
+            <div class="button-row full-width">
+                <button class="button full-width" onclick="window.location.href='/gallery.html'">Go To Gallery</button>
+            </div>
+        </div>
+        <script>
+            const album_select = document.getElementById("album_select");
+            get_album_list();
+        </script>
+    </body>
+</html>
