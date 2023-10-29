@@ -13,7 +13,6 @@ from datetime import datetime
 import toasts
 import text_display
 
-
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 log_file = f"logs/{timestamp}.log"
 logging.basicConfig(filename=log_file, format="%(name)s - %(levelname)s - %(asctime)s - %(message)s", level=logging.INFO)
