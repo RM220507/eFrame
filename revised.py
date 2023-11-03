@@ -460,9 +460,9 @@ class eFrame(socketio.AsyncServer):
                 text_display.display_text(self.canvas, self.album, 40, self.config.get("album_color", BLACK), (25, 25), "left")
                 
             if self.config.get("display_desc"):
-                if self.current_info[4]:
+                if len(self.current_info) >= 4 and self.current_info[4]:
                     text_display.display_text_wrapped(self.canvas, self.current_info[4], 40, self.config.get("desc_color", BLACK), (25, self.height - 80), self.width // 2, "left")
-                    
+                        
             pygame.display.flip()
 
 eframe = eFrame()

@@ -1,10 +1,1 @@
-{
-  "photos_root_path": "images",
-  "update_interval": 3,
-  "display_toasts": true,
-  "display_album": true,
-  "album_color": [0, 0, 255],
-  "background-color": [255, 255, 255],
-  "display_desc": true,
-  "desc_color": [0, 0, 0]
-}
+{"photos_root_path": "images", "update_interval": 3, "display_toasts": true, "display_album": true, "album_color": [0, 0, 255], "background-color": [255, 255, 255], "display_desc": true, "desc_color": [0, 0, 0]}
